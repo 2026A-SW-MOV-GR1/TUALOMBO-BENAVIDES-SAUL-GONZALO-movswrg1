@@ -1,0 +1,12 @@
+Label {
+  font-size: 14;
+  margin-bottom: 4;
+}
+
+TextField {
+  font-size: 16;
+}
+
+Button {
+  margin-top: 10;
+}

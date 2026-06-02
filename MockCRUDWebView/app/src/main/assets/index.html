@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock CRUD WebView</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f3f6fb;
+            color: #1f2937;
+        }
+
+        .container {
+            padding: 18px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 24px;
+            border-radius: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+        }
+
+        .header h1 {
+            font-size: 25px;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .search {
+            flex: 1;
+            padding: 13px;
+            border-radius: 14px;
+            border: 1px solid #d1d5db;
+            font-size: 14px;
+            outline: none;
+            background: white;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 14px;
+            padding: 11px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-success {
+            background: #16a34a;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        .list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid #eef2f7;
+        }
+
+        .avatar {
+            min-width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .content h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .content p {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 999px;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+
+        .badge-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-inactive {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .card-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .card-actions .btn {
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+
+        .empty {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            color: #6b7280;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+        }
+
+        .modal-bg {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 99;
+        }
+
+        .modal {
+            background: white;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.20);
+        }
+
+        .modal h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 13px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 13px;
+            border: 1px solid #d1d5db;
+            outline: none;
+            font-size: 14px;
+        }
+
+        textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        .switch-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            border-radius: 13px;
+        }
+
+        .switch-box input {
+            width: 22px;
+            height: 22px;
+        }
+
+        .modal-actions {
+            margin-top: 18px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .detail-line {
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .detail-line strong {
+            color: #111827;
+        }
+
+        @media (max-width: 620px) {
+            .actions {
+                flex-direction: column;
+            }
+
+            .card {
+                align-items: flex-start;
+            }
+
+            .card-actions {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Gestión de Productos</h1>
+        <p>CRUD visual en WebView usando HTML, CSS, JavaScript y componentes nativos de Android.</p>
+    </div>
+
+    <div class="actions">
+        <input id="searchInput" class="search" type="text" placeholder="Buscar producto...">
+        <button class="btn btn-primary" onclick="openCreateForm()">+ Agregar</button>
+    </div>
+
+    <div id="productList" class="list"></div>
+
+</div>
+
+<!-- Modal Formulario -->
+<div id="formModal" class="modal-bg">
+    <div class="modal">
+        <h2 id="formTitle">Agregar producto</h2>
+
+        <input type="hidden" id="idInput">
+
+        <div class="form-group">
+            <label>Título</label>
+            <input type="text" id="titleInput" placeholder="Ej: Laptop Lenovo">
+        </div>
+
+        <div class="form-group">
+            <label>Subtítulo</label>
+            <input type="text" id="subtitleInput" placeholder="Ej: Equipo para estudiantes">
+        </div>
+
+        <div class="form-group">
+            <label>Categoría</label>
+            <select id="categoryInput">
+                <option value="Tecnología">Tecnología</option>
+                <option value="Educación">Educación</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Accesorios">Accesorios</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Fecha</label>
+            <input type="date" id="dateInput">
+        </div>
+
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea id="descriptionInput" placeholder="Escribe una descripción..."></textarea>
+        </div>
+
+        <div class="switch-box">
+            <label>Activo</label>
+            <input type="checkbox" id="activeInput" checked>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeForm()">Cancelar</button>
+            <button class="btn btn-primary" onclick="saveProduct()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detalle -->
+<div id="detailModal" class="modal-bg">
+    <div class="modal">
+        <h2>Detalle del producto</h2>
+
+        <div id="detailContent"></div>
+
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeDetail()">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let products = [
+        {
+            id: 1,
+            title: "Ruta Inteligente",
+            subtitle: "Sistema de movilidad urbana",
+            category: "Transporte",
+            date: "2026-05-20",
+            description: "Aplicación enfocada en mejorar la movilidad de los usuarios mediante rutas más claras y rápidas.",
+            active: true
+        },
+        {
+            id: 2,
+            title: "Panel Administrativo",
+            subtitle: "Gestión visual de datos",
+            category: "Tecnología",
+            date: "2026-05-21",
+            description: "Panel para consultar, agregar, editar y eliminar registros de manera rápida.",
+            active: true
+        },
+        {
+            id: 3,
+            title: "Formulario UX",
+            subtitle: "Captura de información",
+            category: "Educación",
+            date: "2026-05-22",
+            description: "Formulario diseñado para registrar datos con una experiencia clara y sencilla.",
+            active: false
+        }
+    ];
+
+    let productIdToDelete = null;
+
+    const list = document.getElementById("productList");
+    const searchInput = document.getElementById("searchInput");
+
+    searchInput.addEventListener("input", renderProducts);
+
+    function showToast(message) {
+        try {
+            if (window.Android && Android.showToast) {
+                Android.showToast(message);
+            } else {
+                console.log(message);
+            }
+        } catch (e) {
+            console.log(message);
+        }
+    }
+
+    function showNativeDialog(title, message, callbackName) {
+        try {
+            if (window.Android && Android.showDialog) {
+                Android.showDialog(title, message, callbackName);
+            } else {
+                if (confirm(message)) {
+                    window[callbackName]();
+                }
+            }
+        } catch (e) {
+            if (confirm(message)) {
+                window[callbackName]();
+            }
+        }
+    }
+
+    function getInitials(text) {
+        if (!text) return "?";
+        return text.substring(0, 2).toUpperCase();
+    }
+
+    function renderProducts() {
+        const search = searchInput.value.toLowerCase().trim();
+
+        const filteredProducts = products.filter(function(product) {
+            return product.title.toLowerCase().includes(search) ||
+                product.subtitle.toLowerCase().includes(search) ||
+                product.category.toLowerCase().includes(search);
+        });
+
+        list.innerHTML = "";
+
+        if (filteredProducts.length === 0) {
+            list.innerHTML = '<div class="empty">No hay productos registrados.</div>';
+            return;
+        }
+
+        filteredProducts.forEach(function(product) {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            card.innerHTML = `
+                <div class="avatar">${getInitials(product.title)}</div>
+
+                <div class="content">
+                    <h3>${product.title}</h3>
+                    <p>${product.subtitle}</p>
+                    <span class="badge">${product.category}</span>
+                    <span class="badge ${product.active ? 'badge-active' : 'badge-inactive'}">
+                        ${product.active ? 'Activo' : 'Inactivo'}
+                    </span>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn btn-success" onclick="viewProduct(${product.id})">Ver</button>
+                    <button class="btn btn-warning" onclick="openEditForm(${product.id})">Editar</button>
+                    <button class="btn btn-danger" onclick="confirmDelete(${product.id})">Eliminar</button>
+                </div>
+            `;
+
+            list.appendChild(card);
+        });
+    }
+
+    function openCreateForm() {
+        document.getElementById("formTitle").innerText = "Agregar producto";
+
+        document.getElementById("idInput").value = "";
+        document.getElementById("titleInput").value = "";
+        document.getElementById("subtitleInput").value = "";
+        document.getElementById("categoryInput").value = "Tecnología";
+        document.getElementById("dateInput").value = "";
+        document.getElementById("descriptionInput").value = "";
+        document.getElementById("activeInput").checked = true;
+
+        document.getElementById("formModal").style.display = "flex";
+    }
+
+    function openEditForm(id) {
+        const product = products.find(function(item) {
+            return item.id === id;
+        });
+
+        if (!product) {
+            showToast("Producto no encontrado");
+            return;
+        }
+
+        document.getElementById("formTitle").innerText = "Editar producto";
+
+        document.getElementById("idInput").value = product.id;
+        document.getElementById("titleInput").value = product.title;
+        document.getElementById("subtitleInput").value = product.subtitle;
+        document.getElementById("categoryInput").value = product.category;
+        document.getElementById("dateInput").value = product.date;
+        document.getElementById("descriptionInput").value = product.description;
+        document.getElementById("activeInput").checked = product.active;
+
+        document.getElementById("formModal").style.display = "flex";
+    }
+
+    function closeForm() {
+        document.getElementById("formModal").style.display = "none";
+    }
+
+    function saveProduct() {
+        const id = document.getElementById("idInput").value;
+        const title = document.getElementById("titleInput").value.trim();
+        const subtitle = document.getElementById("subtitleInput").value.trim();
+        const category = document.getElementById("categoryInput").value;
+        const date = document.getElementById("dateInput").value;
+        const description = document.getElementById("descriptionInput").value.trim();
+        const active = document.getElementById("activeInput").checked;
+
+        if (title === "" || subtitle === "" || date === "" || description === "") {
+            showToast("Completa todos los campos");
+            return;
+        }
+
+        if (id === "") {
+            const newProduct = {
+                id: new Date().getTime(),
+                title: title,
+                subtitle: subtitle,
+                category: category,
+                date: date,
+                description: description,
+                active: active
+            };
+
+            products.push(newProduct);
+
+            closeForm();
+            renderProducts();
+
+            showToast("Producto agregado correctamente");
+        } else {
+            const index = products.findIndex(function(item) {
+                return item.id == id;
+            });
+
+            if (index !== -1) {
+                products[index].title = title;
+                products[index].subtitle = subtitle;
+                products[index].category = category;
+                products[index].date = date;
+                products[index].description = description;
+                products[index].active = active;
+
+                closeForm();
+                renderProducts();
+
+                showToast("Producto actualizado correctamente");
+            } else {
+                showToast("No se pudo actualizar");
+            }
+        }
+    }
+
+    function viewProduct(id) {
+        const product = products.find(function(item) {
+            return item.id === id;
+        });
+
+        if (!product) {
+            showToast("Producto no encontrado");
+            return;
+        }
+
+        document.getElementById("detailContent").innerHTML = `
+            <div class="detail-line"><strong>Título:</strong> ${product.title}</div>
+            <div class="detail-line"><strong>Subtítulo:</strong> ${product.subtitle}</div>
+            <div class="detail-line"><strong>Categoría:</strong> ${product.category}</div>
+            <div class="detail-line"><strong>Fecha:</strong> ${product.date}</div>
+            <div class="detail-line"><strong>Estado:</strong> ${product.active ? "Activo" : "Inactivo"}</div>
+            <div class="detail-line"><strong>Descripción:</strong><br>${product.description}</div>
+        `;
+
+        document.getElementById("detailModal").style.display = "flex";
+    }
+
+    function closeDetail() {
+        document.getElementById("detailModal").style.display = "none";
+    }
+
+    function confirmDelete(id) {
+        productIdToDelete = id;
+
+        showNativeDialog(
+            "Confirmar eliminación",
+            "¿Deseas eliminar este producto?",
+            "deleteConfirmed"
+        );
+    }
+
+    function deleteConfirmed() {
+        if (productIdToDelete === null) {
+            showToast("No hay producto seleccionado");
+            return;
+        }
+
+        products = products.filter(function(product) {
+            return product.id !== productIdToDelete;
+        });
+
+        productIdToDelete = null;
+
+        renderProducts();
+        showToast("Producto eliminado correctamente");
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        renderProducts();
+    });
+
+    renderProducts();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+<Page>
+    <ActionBar title="Proyecto FIS - Red y Seguridad" />
+    <StackLayout padding="20" verticalAlignment="center">
+        <Button text="Ir a Módulo 1: REST API" tap="onGoToRest" class="-primary" margin="10" />
+        <Button text="Ir a Módulo 3: Secretos" tap="onGoToSecretos" class="-primary" margin="10" />
+    </StackLayout>
+</Page>

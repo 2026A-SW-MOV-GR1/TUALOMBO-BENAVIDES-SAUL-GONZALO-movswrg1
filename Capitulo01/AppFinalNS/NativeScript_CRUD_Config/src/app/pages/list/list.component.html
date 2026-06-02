@@ -1,0 +1,48 @@
+<ActionBar title="Lista de Items"></ActionBar>
+
+<StackLayout padding="15">
+  <Button
+    text="Agregar nuevo item"
+    class="btn btn-primary"
+    marginBottom="15"
+    (tap)="onAdd()">
+  </Button>
+
+  <ListView
+    [items]="items"
+    height="500"
+    (itemTap)="onEdit(items[$event.index])">
+
+    <ng-template let-item="item">
+      <GridLayout columns="80, *, 90" rows="auto" padding="10">
+        <Image
+          [src]="item.image"
+          width="60"
+          height="60"
+          col="0">
+        </Image>
+
+        <StackLayout col="1" verticalAlignment="center">
+          <Label
+            [text]="item.title"
+            fontSize="18"
+            fontWeight="bold">
+          </Label>
+
+          <Label
+            [text]="item.subtitle"
+            fontSize="14">
+          </Label>
+        </StackLayout>
+
+        <Button
+          text="Eliminar"
+          col="2"
+          fontSize="12"
+          verticalAlignment="center"
+          (tap)="onDelete(item)">
+        </Button>
+      </GridLayout>
+    </ng-template>
+  </ListView>
+</StackLayout>

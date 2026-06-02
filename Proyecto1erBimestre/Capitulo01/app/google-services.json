@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1004077975728",
+    "project_id": "moviles-2026a-gr1-sgtb",
+    "storage_bucket": "moviles-2026a-gr1-sgtb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004077975728:android:ba92b6dc50d2b0b2411375",
+        "android_client_info": {
+          "package_name": "com.example.moviles2026aswgr1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw84AnLLmKPiBJqmP1j1hy0l2axju3SMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

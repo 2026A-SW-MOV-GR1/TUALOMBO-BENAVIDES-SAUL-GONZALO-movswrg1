@@ -1,0 +1,38 @@
+<ActionBar title="Formulario"></ActionBar>
+
+<ScrollView>
+  <StackLayout padding="20">
+    <Label text="Título"></Label>
+    <TextField
+      [(ngModel)]="item.title"
+      hint="Ingrese el título"
+      marginBottom="12">
+    </TextField>
+
+    <Label text="Subtítulo"></Label>
+    <TextField
+      [(ngModel)]="item.subtitle"
+      hint="Ingrese el subtítulo"
+      marginBottom="12">
+    </TextField>
+
+    <Label text="URL de imagen"></Label>
+    <TextField
+      [(ngModel)]="item.image"
+      hint="Ingrese la URL de la imagen"
+      marginBottom="20">
+    </TextField>
+
+    <Button
+      text="Guardar"
+      class="btn btn-primary"
+      (tap)="save()">
+    </Button>
+
+    <Button
+      text="Cancelar"
+      class="btn"
+      (tap)="cancel()">
+    </Button>
+  </StackLayout>
+</ScrollView>
