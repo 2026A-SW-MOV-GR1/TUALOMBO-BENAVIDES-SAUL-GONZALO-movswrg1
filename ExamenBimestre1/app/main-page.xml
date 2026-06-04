@@ -1,0 +1,58 @@
+<Page navigatingTo="onNavigatingTo" backgroundColor="#F4F6F8">
+
+    <ActionBar backgroundColor="#FFFFFF" flat="true">
+        <ActionBar.titleView>
+            <StackLayout orientation="horizontal" width="100%" horizontalAlignment="center" padding="5">
+                <Label text="NoSQL" verticalAlignment="center" marginRight="12" fontSize="15" color="#555555"/>
+                <Switch checked="{{ isSqlActive }}" verticalAlignment="center" color="#4A90E2" />
+                <Label text="SQL" verticalAlignment="center" marginLeft="12" fontSize="15" fontWeight="bold" color="#333333"/>
+            </StackLayout>
+        </ActionBar.titleView>
+    </ActionBar>
+
+    <GridLayout rows="auto, auto, *" padding="15">
+
+        <Label row="0" text="{{ currentEngineText }}" color="#FFFFFF" backgroundColor="{{ indicatorColor }}"
+            padding="12" borderRadius="10" textAlignment="center" marginBottom="20"
+            fontWeight="bold" fontSize="14" letterSpacing="0.05" />
+
+        <StackLayout row="1" backgroundColor="#FFFFFF" borderRadius="12" padding="20" marginBottom="20"
+            borderWidth="1" borderColor="#E2E8F0">
+            <Label text="{{ formTitle }}" fontSize="18" fontWeight="800" color="#2C3E50" marginBottom="15" />
+
+            <TextField hint="Nombre del producto o item" text="{{ newItemName }}"
+                borderBottomWidth="2" borderBottomColor="#4A90E2" padding="10" marginBottom="15" fontSize="16"/>
+
+            <TextField hint="Categoría" text="{{ newItemCategory }}"
+                borderBottomWidth="2" borderBottomColor="#4A90E2" padding="10" marginBottom="20" fontSize="16"/>
+
+            <GridLayout columns="*, *">
+                <Button col="0" text="Cancelar" tap="{{ resetForm }}" class="-outline"
+                    visibility="{{ isEditing ? 'visible' : 'collapse' }}" marginRight="5" borderRadius="8" />
+                <Button col="1" text="{{ submitButtonText }}" tap="{{ onSave }}"
+                    backgroundColor="#4A90E2" color="white" fontWeight="bold" borderRadius="8" padding="12" colSpan="{{ isEditing ? '1' : '2' }}" />
+            </GridLayout>
+        </StackLayout>
+
+        <ListView row="2" items="{{ items }}" itemTap="{{ onItemTap }}" backgroundColor="transparent" separatorColor="transparent">
+            <ListView.itemTemplate>
+                <StackLayout padding="10">
+                    <GridLayout columns="auto, *" backgroundColor="#FFFFFF" borderRadius="10" padding="15"
+                        borderWidth="1" borderColor="#EAEEF3">
+
+                        <Label col="0" text="{{ category.charAt(0) }}" textTransform="uppercase"
+                            backgroundColor="#EAEEF3" color="#4A90E2" width="40" height="40"
+                            borderRadius="20" textAlignment="center" verticalAlignment="center"
+                            fontSize="18" fontWeight="bold" marginRight="15"/>
+
+                        <StackLayout col="1" verticalAlignment="center">
+                            <Label text="{{ name }}" fontSize="16" fontWeight="bold" color="#2C3E50" marginBottom="2"/>
+                            <Label text="{{ category }}" fontSize="13" color="#7F8C8D" />
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+            </ListView.itemTemplate>
+        </ListView>
+
+    </GridLayout>
+</Page>
