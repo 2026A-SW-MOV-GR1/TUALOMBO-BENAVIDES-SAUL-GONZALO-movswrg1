@@ -1,0 +1,512 @@
+<Page
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:map="@nativescript/google-maps"
+    navigatingTo="onNavigatingTo"
+    loaded="onPageLoaded"
+    actionBarHidden="true"
+    class="page">
+
+    <GridLayout rows="auto, *" class="uber-root">
+
+        <GridLayout
+            row="0"
+            columns="auto, *, auto"
+            class="location-warning"
+            tap="onLocationTap">
+
+            <Label col="0" text="⌖" class="location-warning-icon" />
+            <Label
+                col="1"
+                text="La opción para compartir la ubicación está desactivada. Toca aquí para activarla."
+                textWrap="true"
+                class="location-warning-text" />
+            <Label col="2" text="›" class="location-warning-arrow" />
+        </GridLayout>
+
+        <GridLayout row="1" class="body-area">
+
+            <GridLayout id="contentArea" class="content-area">
+
+                <!-- INICIO -->
+                <ScrollView
+                    visibility="{{ isHomeVisible ? 'visible' : 'collapsed' }}"
+                    class="screen-scroll">
+
+                    <StackLayout class="home-inner">
+
+                        <GridLayout columns="*, auto" class="match-banner">
+                            <StackLayout col="0" class="match-text-area">
+                                <Label text="Ir al partido" class="match-title" />
+                                <Label
+                                    text="Llega a donde quieras y vuelve sin estrés"
+                                    class="match-subtitle"
+                                    textWrap="true" />
+                                <Button text="Reservar ahora" class="match-button" tap="onReserveTap" />
+                            </StackLayout>
+
+                            <Image
+                                col="1"
+                                src="https://images.unsplash.com/photo-1522778119026-d647f0596c20"
+                                stretch="aspectFill"
+                                class="match-image" />
+                        </GridLayout>
+
+                        <ScrollView orientation="horizontal" class="product-scroll">
+                            <StackLayout orientation="horizontal" class="product-tabs">
+
+                                <StackLayout class="product-tab active-product" tap="onStartRideTap">
+                                    <GridLayout columns="auto, auto">
+                                        <Image col="0" src="https://img.icons8.com/fluency/80/car.png" class="product-icon" />
+                                        <Label col="1" text="Uber" class="product-tab-text active-product-text" />
+                                    </GridLayout>
+                                    <Label text="" class="product-line" />
+                                </StackLayout>
+
+                                <StackLayout class="product-tab" tap="onGenericFeatureTap">
+                                    <GridLayout columns="auto, auto">
+                                        <Image col="0" src="https://img.icons8.com/fluency/80/shopping-basket.png" class="product-icon" />
+                                        <Label col="1" text="Uber Eats" class="product-tab-text" />
+                                    </GridLayout>
+                                </StackLayout>
+
+                                <StackLayout class="product-tab" tap="onGenericFeatureTap">
+                                    <GridLayout columns="auto, auto">
+                                        <Image col="0" src="https://img.icons8.com/fluency/80/shopping-bag.png" class="product-icon" />
+                                        <Label col="1" text="Envíos" class="product-tab-text" />
+                                    </GridLayout>
+                                </StackLayout>
+
+                                <StackLayout class="product-tab" tap="onGenericFeatureTap">
+                                    <GridLayout columns="auto, auto">
+                                        <Image col="0" src="https://img.icons8.com/fluency/80/shop.png" class="product-icon" />
+                                        <Label col="1" text="Tienda" class="product-tab-text" />
+                                    </GridLayout>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <GridLayout
+                            columns="auto, *, auto"
+                            class="home-search"
+                            tap="onSearchTap">
+
+                            <Image col="0" src="https://img.icons8.com/ios-glyphs/90/ffffff/search--v1.png" class="search-image" />
+
+                            <Label
+                                col="1"
+                                text="{{ pickupText }}"
+                                textWrap="true"
+                                class="home-search-text" />
+
+                            <GridLayout col="2" columns="auto, auto" class="later-chip">
+                                <Image col="0" src="https://img.icons8.com/ios-glyphs/60/ffffff/calendar.png" class="later-image" />
+                                <Label col="1" text="Más tarde" class="later-text" />
+                            </GridLayout>
+                        </GridLayout>
+
+                        <GridLayout rows="auto, auto" class="recent-box">
+                            <GridLayout row="0" columns="auto, *, auto" class="recent-row">
+                                <Image col="0" src="https://img.icons8.com/ios-filled/80/ffffff/clock--v1.png" class="recent-image" />
+                                <StackLayout col="1">
+                                    <Label text="uyumbicho" class="recent-title" />
+                                </StackLayout>
+                                <Label col="2" text="›" class="recent-arrow" />
+                            </GridLayout>
+
+                            <GridLayout row="1" columns="auto, *, auto" class="recent-row recent-row-border">
+                                <Image col="0" src="https://img.icons8.com/ios-filled/80/ffffff/clock--v1.png" class="recent-image" />
+                                <StackLayout col="1">
+                                    <Label text="Primavera 1" class="recent-title" />
+                                    <Label text="Quito" class="recent-subtitle" />
+                                </StackLayout>
+                                <Label col="2" text="›" class="recent-arrow" />
+                            </GridLayout>
+                        </GridLayout>
+
+                        <GridLayout columns="*, auto" class="section-header">
+                            <Label col="0" text="Para ti" class="section-title" />
+                            <Label col="1" text="→" class="section-arrow" />
+                        </GridLayout>
+
+                        <ScrollView orientation="horizontal">
+                            <StackLayout orientation="horizontal" class="for-you-row">
+
+                                <StackLayout class="circle-option" tap="onStartRideTap">
+                                    <Label text="15%" class="circle-badge" />
+                                    <Image src="https://img.icons8.com/fluency/160/car.png" class="circle-image" />
+                                    <Label text="Viaje" class="circle-title" />
+                                </StackLayout>
+
+                                <StackLayout class="circle-option" tap="onGenericFeatureTap">
+                                    <Image src="https://img.icons8.com/fluency/160/shopping-basket.png" class="circle-image" />
+                                    <Label text="Alimentos" class="circle-title" />
+                                </StackLayout>
+
+                                <StackLayout class="circle-option" tap="onGenericFeatureTap">
+                                    <Image src="https://img.icons8.com/fluency/160/delivery.png" class="circle-image" />
+                                    <Label text="Enviar artícu..." class="circle-title" />
+                                </StackLayout>
+
+                                <StackLayout class="circle-option" tap="onReserveTap">
+                                    <Label text="Oferta" class="circle-badge" />
+                                    <Image src="https://img.icons8.com/fluency/160/calendar.png" class="circle-image" />
+                                    <Label text="Reserva" class="circle-title" />
+                                </StackLayout>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <GridLayout columns="*, auto" class="section-header">
+                            <Label col="0" text="Obtén una entrega con Uber Eats" class="section-title" />
+                            <Label col="1" text="→" class="section-arrow" />
+                        </GridLayout>
+
+                        <ScrollView orientation="horizontal">
+                            <StackLayout orientation="horizontal" class="restaurant-row">
+
+                                <StackLayout class="restaurant-card">
+                                    <Image
+                                        src="https://images.unsplash.com/photo-1562967916-eb82221dfb92"
+                                        stretch="aspectFill"
+                                        class="restaurant-image" />
+                                    <Label text="KFC" class="restaurant-title" />
+                                    <Label text="Costo de envío: $1.09" class="restaurant-subtitle" />
+                                    <Label text="4.6★ (9,000+) · A 21 min" class="restaurant-subtitle" />
+                                </StackLayout>
+
+                                <StackLayout class="restaurant-card">
+                                    <Image
+                                        src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec"
+                                        stretch="aspectFill"
+                                        class="restaurant-image" />
+                                    <Label text="Pollo Campero" class="restaurant-title" />
+                                    <Label text="Costo de envío: $1.19" class="restaurant-subtitle" />
+                                    <Label text="4.5★ (10,000+) · A 25 min" class="restaurant-subtitle" />
+                                </StackLayout>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <GridLayout columns="*, auto" class="coupon-card">
+                            <StackLayout col="0">
+                                <Label text="Ahorra 35%" class="coupon-title" />
+                                <Label text="Hacer un pedido" class="coupon-button" />
+                            </StackLayout>
+
+                            <Image
+                                col="1"
+                                src="https://img.icons8.com/fluency/180/discount.png"
+                                class="coupon-image"
+                                stretch="aspectFit" />
+                        </GridLayout>
+
+                        <GridLayout columns="auto, *, auto" class="uber-one-card">
+                            <Image col="0" src="https://img.icons8.com/fluency/120/car.png" class="uber-one-image" />
+                            <StackLayout col="1">
+                                <Label text="Obtén un $4 de ahorro en Rides" class="uber-one-title" />
+                                <Label text="Únete a Uber One para canjear la oferta" class="uber-one-subtitle" />
+                            </StackLayout>
+                            <Label col="2" text="×" class="uber-one-close" />
+                        </GridLayout>
+
+                        <Label text="Más maneras de usar Uber" class="section-title second-section-title" />
+
+                        <ScrollView orientation="horizontal">
+                            <StackLayout orientation="horizontal" class="more-row">
+
+                                <StackLayout class="more-card">
+                                    <Image
+                                        src="https://images.unsplash.com/photo-1580674285054-bed31e145f59"
+                                        stretch="aspectFill"
+                                        class="more-image" />
+                                    <Label text="Envía un artículo" class="more-title" />
+                                    <Label
+                                        text="Entregas a pedido en toda la ciudad."
+                                        textWrap="true"
+                                        class="more-subtitle" />
+                                </StackLayout>
+
+                                <StackLayout class="more-card">
+                                    <Image
+                                        src="https://images.unsplash.com/photo-1549924231-f129b911e442"
+                                        stretch="aspectFill"
+                                        class="more-image" />
+                                    <Label text="Elige la comodidad" class="more-title" />
+                                    <Label
+                                        text="Socios de la App con mejores calificaciones y autos más nuevos"
+                                        textWrap="true"
+                                        class="more-subtitle" />
+                                </StackLayout>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                    </StackLayout>
+                </ScrollView>
+
+                <!-- OPCIONES -->
+                <ScrollView
+                    visibility="{{ isOptionsVisible ? 'visible' : 'collapsed' }}"
+                    class="options-scroll">
+
+                    <StackLayout class="options-inner">
+
+                        <Label text="Opciones" class="screen-title" />
+                        <Label text="Viaja a cualquier lugar" class="screen-subtitle" />
+
+                        <ScrollView orientation="horizontal">
+                            <StackLayout orientation="horizontal" class="travel-options">
+
+                                <StackLayout class="travel-card" tap="onStartRideTap">
+                                    <Label text="15%" class="red-badge" />
+                                    <Image src="https://img.icons8.com/fluency/160/car.png" class="travel-image" />
+                                    <Label text="Viaje" class="travel-title" />
+                                </StackLayout>
+
+                                <StackLayout class="travel-card" tap="onReserveTap">
+                                    <Label text="Oferta" class="red-badge" />
+                                    <Image src="https://img.icons8.com/fluency/160/calendar.png" class="travel-image" />
+                                    <Label text="Reserva" class="travel-title" />
+                                </StackLayout>
+
+                                <StackLayout class="travel-card" tap="onOlderPeopleTap">
+                                    <Image src="https://img.icons8.com/fluency/160/old-man.png" class="travel-image no-badge-image" />
+                                    <Label text="Personas mayores" textWrap="true" class="travel-title" />
+                                </StackLayout>
+
+                                <StackLayout class="travel-card" tap="onTeensTap">
+                                    <Image src="https://img.icons8.com/fluency/160/student-male.png" class="travel-image no-badge-image" />
+                                    <Label text="Teens" class="travel-title" />
+                                </StackLayout>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <Label text="Recibe tus pedidos a domicilio" class="delivery-title" />
+
+                        <GridLayout rows="auto, auto, auto, auto, auto" columns="*, *" class="delivery-grid">
+
+                            <StackLayout row="0" col="0" class="delivery-card">
+                                <Image src="https://img.icons8.com/fluency/160/shopping-basket.png" class="delivery-image" stretch="aspectFit" />
+                                <Label text="Alimentos" textWrap="true" class="delivery-card-title" />
+                            </StackLayout>
+
+                            <StackLayout row="0" col="1" class="delivery-card right-card">
+                                <Image src="https://img.icons8.com/fluency/160/shopping-cart.png" class="delivery-image" stretch="aspectFit" />
+                                <Label text="Súper" textWrap="true" class="delivery-card-title" />
+                            </StackLayout>
+
+                            <StackLayout row="1" col="0" class="delivery-card">
+                                <Image src="https://img.icons8.com/fluency/160/wine-bottle.png" class="delivery-image" stretch="aspectFit" />
+                                <Label text="Alcohol" textWrap="true" class="delivery-card-title" />
+                            </StackLayout>
+
+                            <StackLayout row="1" col="1" class="delivery-card right-card">
+                                <Image src="https://img.icons8.com/fluency/160/pill.png" class="delivery-image" stretch="aspectFit" />
+                                <Label text="Farmacia" textWrap="true" class="delivery-card-title" />
+                            </StackLayout>
+
+                            <StackLayout row="2" col="0" class="delivery-card">
+                                <Image src="https://img.icons8.com/fluency/160/electronics.png" class="delivery-image" stretch="aspectFit" />
+                                <Label text="Electrónica" textWrap="true" class="delivery-card-title" />
+                            </StackLayout>
+
+                            <StackLayout row="2" col="1" class="delivery-card right-card">
+                                <Image src="https://img.icons8.com/fluency/160/delivery.png" class="delivery-image" stretch="aspectFit" />
+                                <Label text="Express" textWrap="true" class="delivery-card-title" />
+                            </StackLayout>
+
+                            <StackLayout row="3" col="0" class="delivery-card">
+                                <Image src="https://img.icons8.com/fluency/160/shop.png" class="delivery-image" stretch="aspectFit" />
+                                <Label text="Retail" textWrap="true" class="delivery-card-title" />
+                            </StackLayout>
+
+                            <StackLayout row="3" col="1" class="delivery-card right-card">
+                                <Image src="https://img.icons8.com/fluency/160/dog-bowl.png" class="delivery-image" stretch="aspectFit" />
+                                <Label text="Mascotas" textWrap="true" class="delivery-card-title" />
+                            </StackLayout>
+
+                            <StackLayout row="4" col="0" class="delivery-card">
+                                <Image src="https://img.icons8.com/fluency/160/cosmetic-brush.png" class="delivery-image" stretch="aspectFit" />
+                                <Label text="Cuidado personal" textWrap="true" class="delivery-card-title" />
+                            </StackLayout>
+
+                            <StackLayout row="4" col="1" class="delivery-card right-card">
+                                <Image src="https://img.icons8.com/fluency/160/baby-bottle.png" class="delivery-image" stretch="aspectFit" />
+                                <Label text="Bebé" textWrap="true" class="delivery-card-title" />
+                            </StackLayout>
+
+                        </GridLayout>
+
+                        <Label text="Obtener ayuda para Courier" class="courier-help" />
+
+                    </StackLayout>
+                </ScrollView>
+
+                <!-- ACTIVIDAD -->
+                <GridLayout
+                    visibility="{{ isActivityVisible ? 'visible' : 'collapsed' }}"
+                    rows="auto, auto, auto, *"
+                    class="activity-screen">
+
+                    <GridLayout row="0" columns="*, auto" class="activity-header">
+                        <Label col="0" text="Actividad" class="screen-title" />
+                    </GridLayout>
+
+                    <GridLayout row="1" columns="*, auto" class="activity-subheader">
+                        <Label col="0" text="Anteriores" class="screen-subtitle" />
+                        <Image col="1" src="https://img.icons8.com/ios-filled/90/ffffff/filter.png" class="filter-button" />
+                    </GridLayout>
+
+                    <StackLayout row="2" class="featured-trip-card">
+
+                        <map:MapView
+                            class="real-map"
+                            lat="-0.1807"
+                            lng="-78.4678"
+                            zoom="14"
+                            bearing="0"
+                            tilt="0"
+                            ready="onMapReady" />
+
+                        <Label text="Centro Comercial Iñaquito (CCI)" class="featured-trip-title" />
+                        <Label text="11 abr · 10:45 a.m." class="featured-trip-info" />
+                        <Label text="$1.24" class="featured-trip-info" />
+
+                        <Label text="↻  Reagendar" class="reorder-button" tap="onStartRideTap" />
+
+                    </StackLayout>
+
+                    <ListView
+                        row="3"
+                        items="{{ tripHistory }}"
+                        itemTap="onActivityTripTap"
+                        class="trip-list">
+
+                        <ListView.itemTemplate>
+                            <GridLayout columns="auto, *, auto" class="trip-item">
+
+                                <Image col="0" src="{{ image }}" stretch="aspectFit" class="trip-image" />
+
+                                <StackLayout col="1" class="trip-info">
+                                    <Label text="{{ destination }}" textWrap="true" class="trip-title" />
+                                    <Label text="{{ date }}" class="trip-date" />
+                                    <Label text="{{ price }}" class="trip-price" />
+                                </StackLayout>
+
+                                <Label col="2" text="↻  Reagendar" class="trip-reorder" />
+
+                            </GridLayout>
+                        </ListView.itemTemplate>
+
+                    </ListView>
+
+                </GridLayout>
+
+                <!-- CUENTA -->
+                <GridLayout
+                    visibility="{{ isAccountVisible ? 'visible' : 'collapsed' }}"
+                    rows="auto, auto, *"
+                    class="account-screen">
+
+                    <GridLayout row="0" columns="*, auto" class="account-header">
+
+                        <StackLayout col="0">
+                            <Label text="{{ userName }}" class="account-name" />
+                            <Label text="★ {{ rating }}" class="rating-chip" />
+                        </StackLayout>
+
+                        <Image
+                            col="1"
+                            src="{{ profileImage }}"
+                            stretch="aspectFill"
+                            class="account-avatar" />
+
+                    </GridLayout>
+
+                    <GridLayout row="1" rows="auto, auto" columns="*, *" class="account-quick-grid">
+
+                        <GridLayout row="0" col="0" columns="auto, *" class="account-quick-card" tap="onGenericFeatureTap">
+                            <Image col="0" src="https://img.icons8.com/ios-filled/80/ffffff/help.png" class="quick-account-image" />
+                            <Label col="1" text="Ayuda" class="quick-account-title" />
+                        </GridLayout>
+
+                        <GridLayout row="0" col="1" columns="auto, *" class="account-quick-card right-quick-card" tap="onGenericFeatureTap">
+                            <Image col="0" src="https://img.icons8.com/ios-filled/80/ffffff/wallet.png" class="quick-account-image" />
+                            <Label col="1" text="Billetera" class="quick-account-title" />
+                        </GridLayout>
+
+                        <GridLayout row="1" col="0" columns="auto, *" class="account-quick-card" tap="onGenericFeatureTap">
+                            <Image col="0" src="https://img.icons8.com/ios-filled/80/ffffff/security-checked.png" class="quick-account-image" />
+                            <Label col="1" text="Seguridad" class="quick-account-title" />
+                        </GridLayout>
+
+                        <GridLayout row="1" col="1" columns="auto, *" class="account-quick-card right-quick-card" tap="onGenericFeatureTap">
+                            <Image col="0" src="https://img.icons8.com/ios-filled/80/ffffff/new-post.png" class="quick-account-image" />
+                            <Label col="1" text="Bandeja de entr..." class="quick-account-title" />
+                        </GridLayout>
+
+                    </GridLayout>
+
+                    <ListView
+                        row="2"
+                        items="{{ accountCards }}"
+                        itemTap="onAccountCardTap"
+                        class="account-card-list">
+
+                        <ListView.itemTemplate>
+                            <GridLayout columns="*, auto" class="account-promo-card">
+
+                                <StackLayout col="0" class="account-card-text">
+                                    <Label text="{{ title }}" textWrap="true" class="account-card-title" />
+                                    <Label text="{{ subtitle }}" textWrap="true" class="account-card-subtitle" />
+                                    <Label text="{{ value }}" class="account-card-value" />
+                                </StackLayout>
+
+                                <Image
+                                    col="1"
+                                    src="{{ image }}"
+                                    stretch="aspectFit"
+                                    class="account-card-image" />
+
+                            </GridLayout>
+                        </ListView.itemTemplate>
+
+                    </ListView>
+
+                </GridLayout>
+
+            </GridLayout>
+
+            <GridLayout
+                id="bottomNav"
+                columns="*, *, *, *"
+                class="bottom-nav">
+
+                <StackLayout col="0" class="nav-item" backgroundColor="{{ navHomeBg }}" tap="onNavHomeTap">
+                    <Image src="https://img.icons8.com/ios-filled/90/ffffff/home.png" class="nav-img" />
+                    <Label text="Inicio" color="{{ navHomeColor }}" class="nav-label" />
+                </StackLayout>
+
+                <StackLayout col="1" class="nav-item" backgroundColor="{{ navOptionsBg }}" tap="onNavOptionsTap">
+                    <Image src="https://img.icons8.com/ios-filled/90/ffffff/grid.png" class="nav-img" />
+                    <Label text="Opciones" color="{{ navOptionsColor }}" class="nav-label" />
+                </StackLayout>
+
+                <StackLayout col="2" class="nav-item" backgroundColor="{{ navActivityBg }}" tap="onNavActivityTap">
+                    <Image src="https://img.icons8.com/ios-filled/90/ffffff/receipt.png" class="nav-img" />
+                    <Label text="Activid..." color="{{ navActivityColor }}" class="nav-label" />
+                </StackLayout>
+
+                <StackLayout col="3" class="nav-item" backgroundColor="{{ navAccountBg }}" tap="onNavAccountTap">
+                    <Image src="https://img.icons8.com/ios-filled/90/ffffff/user.png" class="nav-img" />
+                    <Label text="Cuenta" color="{{ navAccountColor }}" class="nav-label" />
+                </StackLayout>
+
+            </GridLayout>
+
+        </GridLayout>
+
+    </GridLayout>
+</Page>
