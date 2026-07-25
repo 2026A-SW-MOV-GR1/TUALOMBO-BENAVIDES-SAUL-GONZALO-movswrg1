@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style
+        name="Theme.AtencionUrbana"
+        parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/primary_700</item>
+        <item name="colorPrimaryVariant">@color/primary_900</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/secondary_700</item>
+        <item name="colorSecondaryVariant">@color/primary_900</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorError">#B3261E</item>
+
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/primary_900</item>
+        <item name="android:navigationBarColor">@color/background_app</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_900">#0B304A</color>
+    <color name="primary_700">#0E5270</color>
+    <color name="secondary_700">#087B78</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="background_app">#F3F6F9</color>
+    <color name="text_primary">#132633</color>
+    <color name="text_secondary">#51636F</color>
+    <color name="outline_soft">#D7E0E6</color>
+
+    <color name="toolbar_subtitle">#CDE6F4</color>
+    <color name="header_text_secondary">#D8EBF4</color>
+    <color name="header_divider">#42FFFFFF</color>
+
+    <color name="warning_container">#FFF3D8</color>
+    <color name="warning_outline">#E7B44C</color>
+    <color name="warning_text">#684A00</color>
+
+    <color name="priority_container">#FFE5B5</color>
+    <color name="priority_text">#5B3900</color>
+
+    <color name="selected_container">#EAF5FF</color>
+    <color name="selected_outline">#8AC0EA</color>
+
+    <color name="incident_red">#B3261E</color>
+    <color name="brigade_blue">#1565C0</color>
+    <color name="query_orange">#C65D00</color>
+</resources>

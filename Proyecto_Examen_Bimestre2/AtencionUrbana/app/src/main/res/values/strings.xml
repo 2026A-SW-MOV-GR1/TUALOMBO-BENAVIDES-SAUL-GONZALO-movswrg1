@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Atención Urbana</string>
+    <string name="subtitulo_toolbar">Inspección y asignación de brigadas</string>
+
+    <string name="mensaje_sin_incidencia">Todavía no se ha recibido una incidencia desde ReporteUrbano.</string>
+    <string name="mensaje_incidencia_invalida">La incidencia recibida no contiene un identificador o coordenadas válidas.</string>
+    <string name="error_sin_incidencia_valida">No se puede continuar porque no existe una incidencia válida.</string>
+    <string name="error_cargar_mapa">No fue posible cargar el componente del mapa.</string>
+
+    <string name="etapa_actual">Etapa 2 de 3 · Atención</string>
+    <string name="progreso_flujo">Reporte completado  •  Atención en proceso  •  Resolución pendiente</string>
+    <string name="sin_incidencia">Sin incidencia recibida</string>
+
+    <string name="titulo_resumen">Resumen del reporte</string>
+    <string name="titulo_mapa">Centro operativo</string>
+    <string name="descripcion_mapa_mejorada">Explora brigadas, compara distancias y prepara la ruta de atención.</string>
+    <string name="descripcion_accesible_mapa">Mapa interactivo de la incidencia, brigadas y rutas consultadas</string>
+    <string name="ayuda_mapa">Mantén pulsado un punto para medir su distancia</string>
+
+    <string name="titulo_inspeccion">Registro de inspección</string>
+    <string name="subtitulo_inspeccion">Completa la información que recibirá el equipo de resolución.</string>
+    <string name="nota_envio">Se reenviarán los datos originales y la información de esta inspección.</string>
+
+    <string name="sin_dato">No recibido</string>
+    <string name="id_sin_dato">ID: No recibido</string>
+    <string name="descripcion_sin_dato">Descripción no recibida</string>
+    <string name="prioridad_sin_dato">Prioridad: No recibida</string>
+    <string name="fecha_sin_dato">Fecha del reporte: No recibida</string>
+    <string name="estado_sin_dato">Estado: No recibido</string>
+    <string name="coordenadas_sin_dato">Coordenadas: No recibidas</string>
+
+    <string name="formato_id">ID del caso: %1$s</string>
+    <string name="formato_estado_chip">Estado: %1$s</string>
+    <string name="formato_prioridad_chip">Prioridad: %1$s</string>
+    <string name="formato_fecha_reporte">Fecha del reporte: %1$s</string>
+    <string name="formato_coordenadas">Coordenadas: %1$.6f, %2$.6f</string>
+
+    <string name="brigada_norte">Brigada Norte</string>
+    <string name="brigada_centro">Brigada Centro</string>
+    <string name="brigada_sur">Brigada Sur</string>
+
+    <string name="marcador_incidente">Incidente: %1$s</string>
+    <string name="marcador_estado">Estado recibido: %1$s</string>
+    <string name="marcador_brigada_distancia">Disponible · %1$s del incidente</string>
+    <string name="marcador_punto_consultado">Punto consultado</string>
+
+    <string name="leyenda_incidente">● Incidente</string>
+    <string name="leyenda_brigada">● Brigada</string>
+    <string name="leyenda_consulta">● Consulta</string>
+
+    <string name="accion_centrar">Centrar incidente</string>
+    <string name="accion_ver_todo">Ver todos</string>
+    <string name="accion_mas_cercana">Más cercana</string>
+    <string name="accion_vista_satelite">Vista satélite</string>
+    <string name="accion_vista_normal">Vista normal</string>
+    <string name="accion_ocultar_brigadas">Ocultar brigadas</string>
+    <string name="accion_mostrar_brigadas">Mostrar brigadas</string>
+    <string name="accion_abrir_maps">Abrir ruta</string>
+    <string name="accion_limpiar">Limpiar ruta</string>
+
+    <string name="brigada_seleccionada_etiqueta">BRIGADA SELECCIONADA</string>
+    <string name="formato_distancia_resumen">Distancia directa: %1$s</string>
+    <string name="tiempo_estimado">Tiempo urbano estimado: ~%1$d min</string>
+    <string name="valor_distancia_metros">%1$.0f m</string>
+    <string name="valor_distancia_kilometros">%1$.2f km</string>
+    <string name="mensaje_brigada_cercana">%1$s fue seleccionada por ser la más cercana.</string>
+    <string name="mensaje_distancia_consultada">El punto consultado está a %1$s del incidente.</string>
+
+    <string name="etiqueta_nombre_inspector">Nombre del inspector</string>
+    <string name="etiqueta_brigada">Brigada asignada</string>
+    <string name="etiqueta_resultado_inspeccion">Resultado de la inspección</string>
+    <string name="etiqueta_prioridad_confirmada">Prioridad confirmada</string>
+    <string name="boton_enviar_resolucion">Enviar a Resolución Urbana</string>
+
+    <string name="error_nombre_inspector">Ingresa el nombre del inspector.</string>
+    <string name="error_brigada">Selecciona una brigada.</string>
+    <string name="error_resultado_inspeccion">Registra el resultado de la inspección.</string>
+    <string name="error_prioridad_confirmada">Selecciona la prioridad confirmada.</string>
+    <string name="error_aplicacion_claudio_no_disponible">No se encontró ResolucionUrbana o su Activity receptora no está disponible.</string>
+    <string name="error_abrir_mapa_externo">No existe una aplicación disponible para abrir la ruta.</string>
+
+    <string-array name="prioridades_inspeccion">
+        <item>BAJA</item>
+        <item>MEDIA</item>
+        <item>ALTA</item>
+        <item>URGENTE</item>
+    </string-array>
+
+</resources>
